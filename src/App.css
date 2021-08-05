@@ -1,1 +1,17 @@
-
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
+  background: #935bf0;
+  background: linear-gradient(
+    137.42deg,
+    #1a75ff 0%,
+    #6a5df8 50.43%,
+    #c957e6 100%
+  );
+  background-size: 100% 100%;
+  animation: gradient 20s ease infinite;
+}

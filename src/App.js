@@ -2,7 +2,10 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
+
+// components
 import View from './components/view'
+import Header from './components/Header'
 
 // Pages
 import Pigeon from './pages/Pigeon'
@@ -20,6 +23,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Header />
         <View>
           <Switch>
             <Route path="/pigeon">
