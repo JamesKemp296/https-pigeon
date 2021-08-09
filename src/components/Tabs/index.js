@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 
+// Components
+import QueryParamsTab from './QueryParamsTab'
+import TabPanel from './TabPanel'
+
 // Material-ui
 import { makeStyles } from '@material-ui/styles'
 import PropTypes from 'prop-types'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 
 const useStyles = makeStyles(() => ({
@@ -25,28 +26,6 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-function TabPanel(props) {
-  const classes = useStyles()
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      className={classes.root}
-      role="tabpanel"
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  )
-}
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
@@ -60,7 +39,7 @@ function a11yProps(index) {
   }
 }
 
-const INITIAL_QUERY_PARAMS = [{ key: '', value: '' }]
+const INITIAL_QUERY_PARAMS = [{ id: 1, key: '', value: '' }]
 
 export default function BasicTabs() {
   const classes = useStyles()
@@ -85,20 +64,10 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Box display="flex" mb={2}>
-          <TextField
-            label="Key"
-            variant="outlined"
-            className={classes.queryParamsTextField}
-          />
-          <TextField
-            label="Value"
-            variant="outlined"
-            className={classes.queryParamsTextField}
-          />
-          <Button variant="outlined">Remove</Button>
-        </Box>
-        <Button variant="outlined">Add</Button>
+        <QueryParamsTab
+          queryParams={queryParams}
+          setQueryParams={setQueryParams}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
