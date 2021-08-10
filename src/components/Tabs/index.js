@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 // Components
 import QueryParamsTab from './QueryParamsTab'
 import TabPanel from './TabPanel'
+import HeadersTab from './HeadersTab'
 
 // Material-ui
 import { makeStyles } from '@material-ui/styles'
@@ -40,11 +41,13 @@ function a11yProps(index) {
 }
 
 const INITIAL_QUERY_PARAMS = [{ id: 1, key: '', value: '' }]
+const INITIAL_HEADERS = [{ id: 1, key: '', value: '' }]
 
 export default function BasicTabs() {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS)
+  const [headers, setHeaders] = useState(INITIAL_HEADERS)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -70,7 +73,7 @@ export default function BasicTabs() {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <HeadersTab headers={headers} setHeaders={setHeaders} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
