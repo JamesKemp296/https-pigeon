@@ -4,7 +4,9 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+
+// Components
+import QueryParamsInput from './QueryParamsInput'
 
 const useStyles = makeStyles(() => ({
   queryParamsTextField: {
@@ -21,41 +23,47 @@ const QueryParamsTab = ({ queryParams, setQueryParams }) => {
       key: '',
       value: '',
     }
+    console.log(queryParams)
     setQueryParams([...queryParams, newParamPlaceHolder])
   }
 
-  const handleDeleteQueryParamClick = ({ id }) => {
-    const data = queryParams.filter((x) => x.id !== id)
-    setQueryParams([...data])
+  const handleUpdateQueryParamClick = (key, value, id) => {
+    const paramIndex = queryParams.findIndex((param) => param.id === id)
+    const updatedQueryParams = {
+      id: id,
+      key: key,
+      value: value,
+    }
+    setQueryParams([
+      ...queryParams.slice(0, paramIndex),
+      updatedQueryParams,
+      ...queryParams.slice(paramIndex + 1),
+    ])
   }
 
-  const queryParamsInput = (param, i) => {
-    return (
-      <Box display="flex" mb={2} justifyContent="space-between">
-        <TextField
-          label="Key"
-          variant="outlined"
-          className={classes.queryParamsTextField}
-        />
-        <TextField
-          label="Value"
-          variant="outlined"
-          className={classes.queryParamsTextField}
-        />
-        <Button
-          variant="outlined"
-          onClick={() => handleDeleteQueryParamClick(param)}
-        >
-          Remove
-        </Button>
-      </Box>
-    )
+  const handleDeleteQueryParamClick = (id) => {
+    const newParams = [...queryParams]
+    // const paramIndex = queryParams.findIndex((param) => param.id === id)
+    // console.log(queryParams[paramIndex])
+    // newParams.splice(paramIndex, 1)
+    const data = newParams.filter((param) => param.id !== id)
+    // console.log(data)
+    setQueryParams(data)
   }
 
   return (
     <>
       {queryParams.length
-        ? queryParams.map((param, i) => queryParamsInput(param, i))
+        ? queryParams.map((param, i) => {
+            return (
+              <QueryParamsInput
+                key={i}
+                param={param}
+                handleDeleteQueryParamClick={handleDeleteQueryParamClick}
+                handleUpdateQueryParamClick={handleUpdateQueryParamClick}
+              />
+            )
+          })
         : null}
       <Button variant="outlined" onClick={handleAddQueryParamClick}>
         Add

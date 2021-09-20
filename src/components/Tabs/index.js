@@ -45,7 +45,7 @@ const INITIAL_HEADERS = [{ id: 1, key: '', value: '' }]
 
 export default function BasicTabs() {
   const classes = useStyles()
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useState(0)
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS)
   const [headers, setHeaders] = useState(INITIAL_HEADERS)
 
