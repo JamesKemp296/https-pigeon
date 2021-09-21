@@ -16,6 +16,7 @@ const useStyles = makeStyles(() => ({
 
 const QueryParamsTab = ({ queryParams, setQueryParams }) => {
   const classes = useStyles()
+  console.log({ CurrentState: queryParams })
 
   const handleAddQueryParamClick = () => {
     const newParamPlaceHolder = {
@@ -23,7 +24,6 @@ const QueryParamsTab = ({ queryParams, setQueryParams }) => {
       key: '',
       value: '',
     }
-    console.log(queryParams)
     setQueryParams([...queryParams, newParamPlaceHolder])
   }
 
@@ -43,28 +43,26 @@ const QueryParamsTab = ({ queryParams, setQueryParams }) => {
 
   const handleDeleteQueryParamClick = (id) => {
     const newParams = [...queryParams]
-    // const paramIndex = queryParams.findIndex((param) => param.id === id)
-    // console.log(queryParams[paramIndex])
-    // newParams.splice(paramIndex, 1)
-    const data = newParams.filter((param) => param.id !== id)
+    const paramIndex = queryParams.findIndex((param) => param.id === id)
+    console.log({ toBeDeleted: queryParams[paramIndex] })
+    newParams.splice(paramIndex, 1)
+    // const data = newParams.filter((param) => param.id !== id)
     // console.log(data)
-    setQueryParams(data)
+    setQueryParams(newParams)
   }
 
   return (
     <>
-      {queryParams.length
-        ? queryParams.map((param, i) => {
-            return (
-              <QueryParamsInput
-                key={i}
-                param={param}
-                handleDeleteQueryParamClick={handleDeleteQueryParamClick}
-                handleUpdateQueryParamClick={handleUpdateQueryParamClick}
-              />
-            )
-          })
-        : null}
+      {queryParams.map((param, i) => {
+        return (
+          <QueryParamsInput
+            key={i}
+            param={param}
+            handleDeleteQueryParamClick={handleDeleteQueryParamClick}
+            handleUpdateQueryParamClick={handleUpdateQueryParamClick}
+          />
+        )
+      })}
       <Button variant="outlined" onClick={handleAddQueryParamClick}>
         Add
       </Button>

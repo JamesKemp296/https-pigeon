@@ -32,7 +32,7 @@ const QueryParamsInput = ({
   handleUpdateQueryParamClick,
 }) => {
   const classes = useStyles()
-  console.log(param)
+  console.log({ currentParam: param })
 
   const [isEdit, setIsEdit] = useState(true)
   const [formData, setFormData] = useState({

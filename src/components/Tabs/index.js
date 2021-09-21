@@ -61,9 +61,9 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Query Params" {...a11yProps(0)} className={classes.tab} />
-          <Tab label="Headers" {...a11yProps(1)} className={classes.tab} />
-          <Tab label="JSON" {...a11yProps(2)} className={classes.tab} />
+          <Tab label="Query Params" {...a11yProps(0)} />
+          <Tab label="Headers" {...a11yProps(1)} />
+          <Tab label="JSON" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
